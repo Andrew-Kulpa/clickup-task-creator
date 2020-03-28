@@ -1,0 +1,32 @@
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: Andrew-Kulpa/clickup-task-creator
+description: "Github Action for creating a ClickUp Task"
+author: Andrew Kulpa
+inputs:
+  # file uploading
+  list_id:
+    description: "List ID for where the created task exists"
+    required: true
+  status:
+    description: "Status for the created ask"
+    required: true
+  # release message body
+  task_name:
+    description: "Path to text file for the body of the release"
+    required: true
+  task_description:
+    description: "Body of the release"
+    default: ""
+    required: false
+  github_token:
+    description: "Github Auth Token"
+    required: true
+  clickup_token:
+    description: "ClickUp Auth Token"
+    required: true
+runs:
+  using: "node12"
+  main: "dist/index.js"
+branding:
+  color: "green"
+  icon: "package"
