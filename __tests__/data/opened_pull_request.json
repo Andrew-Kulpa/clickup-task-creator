@@ -1,0 +1,10 @@
+{
+    "pull_request": {
+        "number": 10,
+        "title": "pull_request_title",
+        "html_url": "https://www.github.com/foo/bar/pull/10/",
+        "assignees": "Andrew-Kulpa",
+        "body": "##Description\ntest_description\n###Motivation\nnothing"
+    },
+    "action": "opened"
+}

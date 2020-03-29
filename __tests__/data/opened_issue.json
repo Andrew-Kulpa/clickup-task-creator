@@ -1,0 +1,10 @@
+{
+    "issue": {
+        "number": 10,
+        "title": "issue_title",
+        "html_url": "https://www.github.com/foo/bar/issues/10/",
+        "assignees": "Andrew-Kulpa",
+        "body": "##Description\ntest_description\n###Motivation\nnothing"
+    },
+    "action": "opened"
+}

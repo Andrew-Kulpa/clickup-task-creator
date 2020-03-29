@@ -15,7 +15,7 @@ describe('ClickUpRequester', () => {
         let path = "/api/test/123";
 
         // set requestBody for requester
-        const request_promise = requester.request(HTTPMethod.POST, 443, path)
+        requester.request(HTTPMethod.POST, 443, path)
 
         // simulate a server response
         let responseObj = {
