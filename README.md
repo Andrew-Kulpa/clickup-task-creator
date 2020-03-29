@@ -30,11 +30,11 @@ Build and Deployment Process
 
   $ npm prune --production
   $ git add -f node_modules/*
-  $ git add -f lib/*
+  $ git add -f dist/*
   $ git commit -a -m "prod dependencies"
   $ git push origin releases/v{version_number}
   
   < test by referencing the releases/v{version_number} branch >
-  < e.g. `users: andrew-kulpa/action-release@releases/v3 >
+  < e.g. `users: andrew-kulpa/clickup-task-creator@releases/v1 >
   < create a new tag and change the @ reference accordingly >
 ```

@@ -1,0 +1,18 @@
+name: "Pull Request / Issue Task Creator"
+on:
+  pull_request:
+    types: [opened]
+  issues:
+    types: [opened]
+
+jobs:
+  clickup-task:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: andrew-kulpa/labeler@v2
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          clickup_token: "${{ secrets.CLICKUP_TOKEN }}"
+          # https://app.clickup.com/${????}/v/li/${list_id}
+          list_id: 21028730
+          status: TODO
