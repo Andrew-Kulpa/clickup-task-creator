@@ -9,7 +9,7 @@ jobs:
   clickup-task:
     runs-on: ubuntu-latest
     steps:
-      - uses: andrew-kulpa/labeler@v2
+      - uses: andrew-kulpa/clickup-task-creator@releases/v1
         with:
           github_token: "${{ secrets.GITHUB_TOKEN }}"
           clickup_token: "${{ secrets.CLICKUP_TOKEN }}"
