@@ -76,6 +76,8 @@ export class Action {
   createTaskDescription(): string {
     let task_description = "";
 
+    console.log("payload", this.context.payload);
+
     const context_info = {
       "url": this.context.payload?.pull_request?.html_url || this.context.payload?.issue?.html_url,
       "assignees": JSON.stringify(this.context.payload?.pull_request?.assignees || this.context.payload?.issue?.assignees, null, 4),
