@@ -4,6 +4,7 @@ import { TaskRequestContentFactory } from './TaskRequestContentFactory';
 import { ContentType } from '../models/ContentType.enum';
 import { Context } from '@actions/github/lib/context';
 import { HTTPMethod } from '../models/HTTPMethod.enum';
+import { assert } from 'console';
 
 /**
  * Action creates GitHub release action
@@ -37,10 +38,16 @@ export class Action {
     let taskRequestContent = taskRequesterContentFactory.createTaskRequest();
     console.log(taskRequestContent);
 
-    requester.request(HTTPMethod.POST, 443, path);
+    let response = await requester.request(HTTPMethod.POST, 443, path);
+    assert(response.status === 200);
+    console.log({
+      status: [response.status, response.statusText].join(" - "),
+      data: response.data,
+      headers: response.headers
+    })
   }
 
-  createTaskName() {
+  createTaskName(): string {
     let task_name = "<DEFAULT TASK NAME>";
 
     if (this.context.payload.pull_request) {
@@ -60,7 +67,7 @@ export class Action {
   //  ]
   // val = pull_request_review, type = [submitted,edited,dismissed]
   // val = pull_request_review_comment, type = [created,edited,deleted]
-  createTaskDescription() {
+  createTaskDescription(): string {
     let task_description = "";
 
     const context_info = {
