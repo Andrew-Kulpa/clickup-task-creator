@@ -13,8 +13,7 @@ export interface Inputs {
  */
 export class ActionInputs implements Inputs {
   /**
-   * Action inputs takes an artifact globber and the current GitHub context
-   * @param {ArtifactGlobber} artifactGlobber
+   * Action inputs takes only the current GitHub context
    * @param {Context} context
    */
   constructor(
