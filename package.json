@@ -8,7 +8,8 @@
     "url": "https://github.com/Andrew-Kulpa/clickup-task-creator.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "keywords": [
     "clickup",
