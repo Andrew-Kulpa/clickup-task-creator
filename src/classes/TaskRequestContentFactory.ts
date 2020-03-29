@@ -16,7 +16,7 @@ export class TaskRequestContentFactory {
 
     setContent(content: string, type: ContentType) {
         if (type === ContentType.markdown) {
-            this.taskRequestContent.markdownContent = content;
+            this.taskRequestContent.markdown_content = content;
         } else if (type === ContentType.plaintext) {
             this.taskRequestContent.content = content;
         }
