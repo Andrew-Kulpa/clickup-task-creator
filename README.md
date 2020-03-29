@@ -22,13 +22,12 @@ An example of its usage is given below with some options commented out for clari
 Build and Deployment Process
 -------------
 ```
+  $ git checkout -b releases/v{version_number}
+
   $ npm install
   $ npm run build
-  
-  $ git checkout -b releases/v{version_number}
-  $ git commit -a -m "prod dependencies"
-
   $ npm prune --production
+  
   $ git add -f node_modules/*
   $ git add -f dist/*
   $ git commit -a -m "prod dependencies"
