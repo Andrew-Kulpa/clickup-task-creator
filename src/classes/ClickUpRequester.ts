@@ -22,6 +22,7 @@ export class ClickUpRequester {
 
     async request(method: Method, port: number, path: string, params = {}): Promise<AxiosResponse<any>> {
         let requestObject = this.createRequestObject(method, port, path, params);
+        console.log("Requesting", requestObject.data, requestObject.baseURL, requestObject.url);
         return axios(requestObject);
     }
 

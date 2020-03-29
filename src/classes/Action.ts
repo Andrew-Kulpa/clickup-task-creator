@@ -4,7 +4,6 @@ import { TaskRequestContentFactory } from './TaskRequestContentFactory';
 import { ContentType } from '../models/ContentType.enum';
 import { Context } from '@actions/github/lib/context';
 import { HTTPMethod } from '../models/HTTPMethod.enum';
-import { assert } from 'console';
 
 /**
  * Action creates GitHub release action
@@ -18,7 +17,6 @@ export class Action {
    */
   constructor(
     private readonly inputs: Inputs,
-    private readonly clickUpRequester: ClickUpRequester,
     private readonly context: Context
   ) { }
 
@@ -27,7 +25,6 @@ export class Action {
    * @return {Promise<void>}
    */
   async run(): Promise<void> {
-
     let requester = new ClickUpRequester(this.inputs.clickup_token);
     const path = `/api/v2/list/${this.inputs.list_id}/task`;
     const task_name = this.createTaskName();
@@ -36,24 +33,33 @@ export class Action {
     let taskRequesterContentFactory = new TaskRequestContentFactory(task_name, this.inputs.status);
     taskRequesterContentFactory.setContent(task_description, ContentType.markdown)
     let taskRequestContent = taskRequesterContentFactory.createTaskRequest();
-    console.log(taskRequestContent);
+    requester.requestBody = taskRequestContent;
 
     let response = await requester.request(HTTPMethod.POST, 443, path);
-    assert(response.status === 200);
-    console.log({
+    let response_data = {
       status: [response.status, response.statusText].join(" - "),
       data: response.data,
       headers: response.headers
-    })
+    };
+    console.log("ClickUp Response:", response_data);
+
+    // TODO: get task id, url from response --> post comment on Issue / PR for it
+    // https://github.com/actions/toolkit/blob/master/docs/github-package.md#sending-requests-to-the-github-api
   }
 
   createTaskName(): string {
     let task_name = "<DEFAULT TASK NAME>";
 
     if (this.context.payload.pull_request) {
-      task_name = "Review Pull Request - " + this.context.payload.pull_request.title;
+      task_name =
+        "Review Pull Request - #" +
+        this.context.payload.pull_request.number + " " +
+        this.context.payload.pull_request.title;
     } else if (this.context.payload.issue) {
-      task_name = "Resolve Issue - " + this.context.payload.issue.title;
+      task_name =
+        "Resolve Issue - #" +
+        this.context.payload.issue.number + " " +
+        this.context.payload.issue.title;
     }
     return task_name;
   }

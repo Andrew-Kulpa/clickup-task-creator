@@ -11,9 +11,8 @@ import { ClickUpRequester } from './classes/ClickUpRequester';
 function createAction(): Action {
     const context = github.context;
     const inputs = new ActionInputs(context);
-    const clickUpRequester = new ClickUpRequester(inputs.clickup_token);
 
-    return new Action(inputs, clickUpRequester, context);
+    return new Action(inputs, context);
 }
 
 /**
