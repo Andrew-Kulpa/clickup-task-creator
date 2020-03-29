@@ -78,7 +78,7 @@ export class Action {
 
     const context_info = {
       "url": this.context.payload?.pull_request?.html_url || this.context.payload?.issue?.html_url,
-      "assignees": this.context.payload?.pull_request?.assignees || this.context.payload?.issue?.assignees,
+      "assignees": JSON.stringify(this.context.payload?.pull_request?.assignees || this.context.payload?.issue?.assignees, null, 4),
       "reviewers": this.context.payload?.pull_request?.reviewers,
       "branch": this.context.payload?.pull_request?.branch
     }
